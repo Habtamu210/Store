@@ -1,0 +1,37 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-dark text-white text-center">
+                <h4>Item Form</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="id_name" class="form-label">Name</label>
+                        <input type="text" name="name" id="id_name" class="form-control" value="{{ form.name.value|default_if_none:'' }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_category" class="form-label">Category</label>
+                        <input type="text" name="category" id="id_category" class="form-control" value="{{ form.category.value|default_if_none:'' }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_quantity" class="form-label">Quantity</label>
+                        <input type="number" name="quantity" id="id_quantity" class="form-control" value="{{ form.quantity.value|default_if_none:0 }}" required>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                </form>
+                {% if form.errors %}
+                    <div class="alert alert-danger mt-3">Please correct the errors below.</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
