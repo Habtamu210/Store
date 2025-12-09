@@ -5,16 +5,13 @@ from store.models import Item
 
 @login_required
 def dashboard(request):
-    user = request.user
-
-    if user.groups.filter(name='Admin').exists():
+    if request.user.groups.filter(name='Admin').exists():
         context = {
             'total_items': Item.objects.count(),
             'total_officers': User.objects.filter(groups__name='StoreOfficer').count()
         }
     else:
         context = {
-            'items': Item.objects.filter(created_by=user)
+            'items': Item.objects.filter(created_by=request.user)
         }
-
     return render(request, 'store/dashboard.html', context)
