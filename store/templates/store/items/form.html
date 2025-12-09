@@ -1,0 +1,18 @@
+{% extends "store/base.html" %}
+{% block content %}
+
+<div class="card col-md-6 mx-auto shadow">
+    <div class="card-header bg-dark text-white text-center">
+        <h4>{{ form.instance.pk|yesno:"Edit Item,Add Item" }}</h4>
+    </div>
+
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-success w-100 mt-2">Save</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
